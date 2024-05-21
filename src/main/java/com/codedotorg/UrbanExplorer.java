@@ -1,6 +1,8 @@
 package com.codedotorg;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -93,6 +95,7 @@ public class UrbanExplorer {
 
         if (!newCity.isEmpty()) {
             cities.add(new City(newCity));
+            sortCities();
             refreshList();
             inputField.clear();
         }
@@ -102,9 +105,13 @@ public class UrbanExplorer {
      * Sorts the cities in the 'cities' list based on their names.
      */
     public void sortCities() {
-        
-
-    }
+    Collections.sort(cities, new Comparator<City>() {
+        @Override
+        public int compare(City c1, City c2) {
+            return c1.getName().compareTo(c2.getName());
+        }
+    });
+}
 
     /**
      * Refreshes the list of cities displayed in the listView.
